@@ -26,5 +26,6 @@ public class 비밀번호_찾기 {
 			bw.newLine();
 		}
 		bw.flush();
+		
 	}
 }
