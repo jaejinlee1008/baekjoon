@@ -57,6 +57,7 @@ public class 토마토 {
 					if(nx>=0&&nx<N&&ny>=0&&ny<M&&!visited[nx][ny]&&arr[nx][ny]==0) {
 						nlist.add(new int[] {nx,ny});
 						arr[nx][ny]=arr[tmp[0]][tmp[1]]+1;
+						visited[nx][ny]=true;
 						max = Math.max(max, arr[nx][ny]);
 					}
 				}
