@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class 곱셈 {
+public class BOJ1629_0810_이재진 {
 	static int A;
 	static int B;
 	static int C;
