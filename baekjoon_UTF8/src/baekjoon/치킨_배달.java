@@ -43,7 +43,7 @@ public class 치킨_배달 {
 	}
 	private static void subset(int cnt,int select) {
 		
-		if(cnt==list2.size()&&select<=M&&select>0) {
+		if(cnt==list2.size()&&select==M&&select>0) {
 			
 			int sum=0;
 			for(int i=0;i<list1.size();i++) {
