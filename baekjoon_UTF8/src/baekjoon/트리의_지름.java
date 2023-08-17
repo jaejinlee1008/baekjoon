@@ -4,60 +4,66 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class 트리의_지름 {
+	static class Edge{
+		int to;
+		int weight;
+		
+		public Edge(int to, int weight) {
+			this.to = to;
+			this.weight = weight;
+		}
+		
+	}
 	static int V;
+	static ArrayList<Edge>[] list;
 	static boolean[] visited;
-	static List<int[]>[] list;
 	static int max = Integer.MIN_VALUE;
+	static int node;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		V = Integer.parseInt(br.readLine());
-		visited = new boolean[V+1];
-		list = new List[V+1];
+		V = Integer.parseInt(br.readLine().trim());
+		list = new ArrayList[V+1];
+		
+		
 		for(int i=1;i<=V;i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			list[i] = new ArrayList<>();
+			StringTokenizer st = new StringTokenizer(br.readLine().trim());
 			int idx = Integer.parseInt(st.nextToken());
-//			visited[idx]=true;
+			list[idx]=new ArrayList<>();
+			
 			while(true) {
 				int num = Integer.parseInt(st.nextToken());
 				if(num==-1) {
 					break;
 				}
 				int weight = Integer.parseInt(st.nextToken());
-				list[i].add(new int[] {num,weight});
-			}
-			
-		}
-		for(List<int[]> l : list) {
-			if(l!=null) {
-				for(int[] ar : l) {
-					System.out.println(Arrays.toString(ar));
-				}
+				list[idx].add(new Edge(num,weight));
 			}
 			
 		}
 		visited = new boolean[V+1];
-		for(int i=1;i<=V;i++) {
-			if(!visited[i]) {
-				visited[i]=true;
-//				DFS(i,0);
-			}
-		}
+		DFS(1,0); //임의의 노드에서 가장 먼 노드 찾기
+		
+		visited = new boolean[V+1];
+		DFS(node,0); //가장 먼 노드에서 출발해 가장 먼 노드까지 거리 구하기
+		
 		System.out.println(max);
 	}
-	private static void DFS(int row,int sum) {
-		if(list[row].size()==0) {
-			max = Math.max(sum, max);
-			return;
+	private static void DFS(int x,int sum) {
+		if(sum>max) {
+			max=sum;
+			node=x;
 		}
-		for(int[] ar : list[row]) {
-			visited[ar[0]] = true;
-			DFS(ar[0],sum+ar[1]);
-		}
+		visited[x]=true;
+		
+		for(int i = 0; i < list[x].size(); i++) {
+            Edge e = list[x].get(i);
+            if(!visited[e.to]) {
+                DFS(e.to, e.weight + sum);
+                visited[e.to] = true;
+            }
+        }
 	}
 }
