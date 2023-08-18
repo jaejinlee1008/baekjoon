@@ -33,26 +33,7 @@ public class 빵집 {
 		System.out.println(ans);
 	}
 	private static boolean DFS(int first,int row,int cnt,int pick,boolean[][] visited) {
-		System.out.println(first+","+row+","+cnt+","+pick);
 		
-		if(cnt==C-1) {
-			System.out.println(Arrays.toString(output));
-			ans = Math.max(ans, pick+1);
-			DFS(first+1,first+1,0,pick+1,visited);
-			System.out.println();
-			return true;
-		}
-		if(row>=R) return false;
-		if(cnt==0) output[0]=row;
-		visited[row][cnt]=true;
-		System.out.println(Arrays.toString(output));
-		for(int i=0;i<3;i++) {
-			int nx = row+dx[i];
-			if(nx>=0&&nx<R&&!visited[nx][cnt+1]&&map[nx][cnt+1]!='x') {
-				output[cnt+1]=nx;
-				DFS(first,nx,cnt+1,pick,visited);
-			}
-		}
 		return false;
 	}
 }
