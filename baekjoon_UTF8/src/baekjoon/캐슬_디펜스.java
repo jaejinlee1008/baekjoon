@@ -3,8 +3,9 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -12,10 +13,11 @@ public class 캐슬_디펜스 {
 	static int N,M,D;
 	static int[][] arr;
 	static int[] output;
-	static int[] dx = {-1,0,0};
-	static int[] dy = {0,-1,1};
+	static int[] dx = {0,-1,0};
+	static int[] dy = {-1,0,1};
 	static int max = Integer.MIN_VALUE;
 	static int enemy;
+	static List<int[]> kill;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine().trim());
@@ -43,7 +45,7 @@ public class 캐슬_디펜스 {
 				}
 			}
 			max = Math.max(BFS(output,tmp),max);
-			System.out.println("-----------------------------------");
+//			System.out.println("-----------------------------------");
 			return;
 		}
 		for(int i=start;i<M;i++) {
@@ -54,20 +56,22 @@ public class 캐슬_디펜스 {
 	private static int BFS(int[] p,int[][] map) {
 		int num=0;
 		Queue<int[]> queue = new LinkedList<>();
-		for(int row=N;row>=0;row--) {
+		
+		for(int row=N;row>=1;row--) {
+			kill = new ArrayList<>();
 			for(int i=0;i<3;i++) {
-				System.out.println(p[i]+"번째 궁수");
+//				System.out.println(p[i]+"번째 궁수");
 				boolean[][] visited = new boolean[row+1][M];
 				queue.add(new int[] {row,p[i],0});
 				visited[row][p[i]]=true;
 				while(!queue.isEmpty()) {
 					int[] tmp = queue.poll();
-					System.out.println(Arrays.toString(tmp));
+//					System.out.println(Arrays.toString(tmp));
 					if(map[tmp[0]][tmp[1]]==1) {
-						num++;
-						if(num==enemy) return num;
-						map[tmp[0]][tmp[1]]=0;
-						System.out.println("병사죽음, "+num);
+//						num++;
+//						map[tmp[0]][tmp[1]]=0;
+						kill.add(new int[] {tmp[0],tmp[1]});
+//						System.out.println("병사죽음, "+num);
 						queue.clear();
 						break;
 					}
@@ -84,10 +88,24 @@ public class 캐슬_디펜스 {
 					}
 				}
 			}
-			
-			System.out.println("한 칸 위로");
+			num += count(kill,map);
+//			System.out.println("한 칸 위로");
 		}
 		
+		
+		
 		return num;
+	}
+	private static int count(List<int[]> list,int[][] map) {
+		int cnt=0;
+		for(int[] pos : list) {
+//			System.out.println(Arrays.toString(pos));
+			if(map[pos[0]][pos[1]]==1) {
+				cnt++;
+				map[pos[0]][pos[1]]=0;
+			}
+		}
+		
+		return cnt;
 	}
 }
