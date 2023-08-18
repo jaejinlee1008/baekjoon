@@ -56,7 +56,7 @@ public class 캐슬_디펜스 {
 		Queue<int[]> queue = new LinkedList<>();
 		for(int row=N;row>=0;row--) {
 			for(int i=0;i<3;i++) {
-				System.out.println(i+"번째 궁수");
+				System.out.println(p[i]+"번째 궁수");
 				boolean[][] visited = new boolean[row+1][M];
 				queue.add(new int[] {row,p[i],0});
 				visited[row][p[i]]=true;
@@ -76,7 +76,7 @@ public class 캐슬_디펜스 {
 						int nx = tmp[0]+dx[j];
 						int ny = tmp[1]+dy[j];
 //						System.out.println(nx+","+ny);
-						if(nx>=0&&nx<=row&&ny>=0&&ny<M&&!visited[nx][ny]&&tmp[2]<D) {
+						if(nx>=0&&nx<row&&ny>=0&&ny<M&&!visited[nx][ny]&&tmp[2]<D) {
 							visited[nx][ny]=true;
 							queue.add(new int[] {nx,ny,tmp[2]+1});
 //							System.out.println("add : "+nx+","+ny+","+(tmp[2]+1));
