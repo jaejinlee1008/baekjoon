@@ -39,29 +39,42 @@ public class BOJ1238_0828_이재진 {
 			int weight = Integer.parseInt(st.nextToken());
 			edgeList[from].add(new Edge(to,weight));
 		}
+		
 		for(int i=1;i<=M;i++) {
-			dist = new int[N+1];
-			visited = new boolean[N+1];
-			Arrays.fill(dist, Integer.MAX_VALUE);
-			dist[i]=0;
-			
-			int vertex=0;
-			int minCost=0;
-			for(int j=1;j<=M;j++) {
-				vertex=-1;
-				minCost = Integer.MAX_VALUE;
-				for(int k=1;k<=M;k++) {
-					if(!visited[k]&&minCost>dist[k]) {
-						vertex=k;
-						minCost = dist[k];
-					}
-				}
-			}
+			Dijkstra(i, X);
 		}
 		
-		
 	}
-	private static void Dijkstra() {
-		
+	private static int Dijkstra(int start, int end) {
+		dist = new int[N+1];
+		visited = new boolean[N+1];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		dist[start]=0;
+		int num=0;
+		int vertex=0;
+		int minCost=0;
+		for(int j=1;j<=M;j++) {
+			vertex=-1;
+			minCost = Integer.MAX_VALUE;
+			for(int k=1;k<=M;k++) {
+				if(!visited[k]&&minCost>dist[k]) {
+					vertex=k;
+					minCost = dist[k];
+				}
+			}
+			if(vertex==-1) break;
+			if(vertex==end) {
+				num=minCost;
+				break;
+			}
+			visited[vertex]=true;
+			for(Edge e : edgeList[vertex]) {
+				if(!visited[e.to]&&dist[e.to]>minCost+e.weight) {
+					dist[e.to] = minCost+e.weight;
+				}
+			}
+			
+		}
+		return num;
 	}
 }
