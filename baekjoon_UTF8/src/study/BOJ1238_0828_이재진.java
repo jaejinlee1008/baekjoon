@@ -22,7 +22,7 @@ public class BOJ1238_0828_이재진 {
 	static int N,M,X;
 	static ArrayList<Edge>[] edgeList;
 	static boolean[] visited;
-	static int[] dist;
+	static int[] result;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -30,9 +30,12 @@ public class BOJ1238_0828_이재진 {
 		M = Integer.parseInt(st.nextToken());
 		X = Integer.parseInt(st.nextToken());
 		edgeList = new ArrayList[N+1];
-		
-		for(int i=1;i<=M;i++) {
+		result = new int[N+1];
+		for(int i=1;i<=N;i++) {
 			edgeList[i] = new ArrayList<>();
+		}
+		for(int i=1;i<=M;i++) {
+			
 			st = new StringTokenizer(br.readLine());
 			int from = Integer.parseInt(st.nextToken());
 			int to = Integer.parseInt(st.nextToken());
@@ -40,23 +43,26 @@ public class BOJ1238_0828_이재진 {
 			edgeList[from].add(new Edge(to,weight));
 		}
 		
-		for(int i=1;i<=M;i++) {
-			Dijkstra(i, X);
+		for(int i=1;i<=N;i++) {
+			result[i]=Dijkstra(i, X)+Dijkstra(X, i);
 		}
-		
+		int max=Integer.MIN_VALUE;
+		for(int i=1;i<=N;i++) {
+			max = Math.max(max, result[i]);
+		}
+		System.out.println(max);
 	}
 	private static int Dijkstra(int start, int end) {
-		dist = new int[N+1];
+		int[] dist = new int[N+1];
 		visited = new boolean[N+1];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[start]=0;
-		int num=0;
 		int vertex=0;
 		int minCost=0;
-		for(int j=1;j<=M;j++) {
+		for(int j=1;j<=N;j++) {
 			vertex=-1;
 			minCost = Integer.MAX_VALUE;
-			for(int k=1;k<=M;k++) {
+			for(int k=1;k<=N;k++) {
 				if(!visited[k]&&minCost>dist[k]) {
 					vertex=k;
 					minCost = dist[k];
@@ -64,7 +70,6 @@ public class BOJ1238_0828_이재진 {
 			}
 			if(vertex==-1) break;
 			if(vertex==end) {
-				num=minCost;
 				break;
 			}
 			visited[vertex]=true;
@@ -75,6 +80,6 @@ public class BOJ1238_0828_이재진 {
 			}
 			
 		}
-		return num;
+		return dist[end];
 	}
 }
