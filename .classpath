@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="baek/src"/>
+	<classpathentry kind="src" path="baekjoon/src"/>
+	<classpathentry kind="src" path="baekjoonSSAFY/src"/>
+	<classpathentry kind="src" path="solved.ac/src"/>
+	<classpathentry kind="output" path="baek/bin"/>
+</classpath>
