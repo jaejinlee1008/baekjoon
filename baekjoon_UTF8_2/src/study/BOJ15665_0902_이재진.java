@@ -30,7 +30,8 @@ public class BOJ15665_0902_이재진 {
 			set.add(num);
 		}
 		Collections.sort(input);
-		perm(0,new int[M]);
+		System.out.println(Math.round(10.222));
+//		perm(0,new int[M]);
 	}
 	private static void perm(int cnt,int[] output) {
 		if(cnt==M) {
