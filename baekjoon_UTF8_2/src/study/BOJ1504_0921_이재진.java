@@ -94,4 +94,30 @@ public class BOJ1504_0921_이재진 {
 		}
 		return dist[end];
 	}
+	// 다익스트라 연습
+//	private static int test(int start,int end) {
+//		int[] dist = new int[N+1];
+//		boolean[] visited = new boolean[N+1];
+//		Arrays.fill(dist, Integer.MAX_VALUE);
+//		int vertex=0;
+//		int minCost=0;
+//		for(int i=1;i<=N;i++) {
+//			vertex=-1;
+//			minCost = Integer.MAX_VALUE;
+//			for(int j=1;j<=N;j++) {
+//				if(!visited[j]&&minCost>dist[j]) {
+//					minCost = dist[j];
+//					vertex=j;
+//				}
+//			}
+//			if(vertex==-1||vertex==end) break;
+//			visited[vertex]=true;
+//			for(Edge e : edgeList[vertex]) {
+//				if(!visited[e.to]&&dist[e.to]>minCost+e.weight) {
+//					dist[e.to] = minCost+e.weight;
+//				}
+//			}
+//		}
+//		return dist[end];
+//	}
 }
