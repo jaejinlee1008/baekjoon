@@ -88,12 +88,12 @@ public class 다리_만들기_2 {
 				}
 			}
 		}
-		for(List<int[]> li : list) {
-			for(int[] ar : li) {
-				System.out.println(Arrays.toString(ar));
-			}
-			System.out.println();
-		}
+//		for(List<int[]> li : list) {
+//			for(int[] ar : li) {
+//				System.out.println(Arrays.toString(ar));
+//			}
+//			System.out.println();
+//		}
 		edgeList = new ArrayList<>();
 		getDistance();
 		
@@ -165,9 +165,12 @@ public class 다리_만들기_2 {
 				boolean flag =true;
 				for(int[] tmp : list.get(i)) {
 					for(int[] tmp2 : list.get(j)) {
-						if(tmp[0]==tmp2[0]&&tmp[1]+1<M&&tmp2[1]-1>=0&&map[tmp[0]][tmp[1]+1]==0&&map[tmp2[0]][tmp2[1]-1]==0) {
+//						System.out.println(Arrays.toString(tmp));
+//						System.out.println(Arrays.toString(tmp2));
+//						System.out.println("비교");
+						if(tmp[0]==tmp2[0]) {
 							flag = true;
-							for(int k=tmp[1]+1;k<=tmp2[1]-1;k++) {
+							for(int k=Math.min(tmp[1], tmp2[1])+1;k<=Math.max(tmp[1], tmp2[1])-1;k++) {
 								if(map[tmp[0]][k]==1) {
 									flag=false;
 									break;
@@ -178,9 +181,9 @@ public class 다리_만들기_2 {
 								len = Math.abs(tmp[1]-tmp2[1]);
 
 							}
-						}else if(tmp[1]==tmp2[1]&&tmp[0]+1<N&&tmp2[0]-1>=0&&map[tmp[0]+1][tmp[1]]==0&&map[tmp2[0]-1][tmp2[1]]==0) {
+						}else if(tmp[1]==tmp2[1]) {
 							flag = true;
-							for(int k=tmp[0]+1;k<=tmp2[0]-1;k++) {
+							for(int k=Math.min(tmp[0], tmp2[0])+1;k<=Math.max(tmp[0], tmp2[0])-1;k++) {
 								if(map[k][tmp[1]]==1) {
 									flag=false;
 									break;
@@ -194,7 +197,7 @@ public class 다리_만들기_2 {
 					}
 				}
 				if(len!=Integer.MAX_VALUE&&len>2) {
-					System.out.println(i+"to"+j+"거리 : " + (len-1));
+//					System.out.println(i+"to"+j+"거리 : " + (len-1));
 					edgeList.add(new Edge(i,j,len-1));
 				}
 			}
