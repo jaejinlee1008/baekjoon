@@ -6,49 +6,43 @@ import java.io.InputStreamReader;
 import java.util.Stack;
 
 public class 문자열_폭발 {
-	static String target;
-	static int tarlen;
+
 	public static void main(String[] args) throws IOException {
-		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String input = br.readLine();
-		target = br.readLine();
-		tarlen = target.length();
-		
-		String result = recur(input);
-		if(result.length()==0) {
-			System.out.println("FRULA");
-		}else {
-			System.out.println(result);
-		}
-	}
-	private static String recur(String input) {
-		if(!input.contains(target)) {
-			return input;
-		}
-		int cnt=0;
+		String target = br.readLine();
+		int ilen = input.length();
+		int tlen = target.length();
 		Stack<Character> stack = new Stack<>();
-		for(int i=0;i<input.length();i++) {
-			
-			if(input.charAt(i)==target.charAt(cnt)) {
-				cnt++;
-			}else {
-				if(cnt!=0) {
-					i--;
-					cnt=0;
-					continue;
-				}
-				cnt=0;
-			}
+		for(int i=0;i<ilen;i++) {
 			stack.push(input.charAt(i));
-			if(cnt==tarlen) {
-				for(int j=0;j<tarlen;j++) {
-					stack.pop();
+			
+			if(stack.size()>=tlen) {
+				boolean flag=true;
+				for(int j=0;j<tlen;j++) {
+					if(stack.get(stack.size()-tlen+j)!=target.charAt(j)) {
+						flag=false;
+						break;
+					}
 				}
-				cnt=0;
+				if(flag) {
+					for(int j=0;j<tlen;j++) {
+						stack.pop();
+					}
+				}
 			}
 		}
-		
-		return recur(stack.toString().replace(" ", "").replace(",", "").replace("[", "").replace("]", ""));
+		if(stack.isEmpty()) {
+			System.out.println("FRULA");
+			return;
+		}else {
+			StringBuilder sb = new StringBuilder();
+			for(int i=0;i<stack.size();i++) {
+				sb.append(stack.get(i));
+			}
+			System.out.println(sb.toString());
+			return;
+		}
 		
 	}
 }
