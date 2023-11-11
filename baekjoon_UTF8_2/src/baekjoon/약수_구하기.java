@@ -18,6 +18,7 @@ public class 약수_구하기 {
 				cnt++;
 			}
 			if(cnt==K){
+				
 				result = i;
 				break;
 			}
