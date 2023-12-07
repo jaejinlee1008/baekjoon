@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -21,6 +20,7 @@ public class 아기_상어 {
 	static int size=2;
 	static int eat=0;
 	static List<int[]> canEat = null;
+	static int cnt=0;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
@@ -38,7 +38,7 @@ public class 아기_상어 {
 		while(true) {
 			bfs();
 			if(canEat==null||canEat.size()==0) {
-				System.out.println("탐색종료");
+//				System.out.println("탐색종료");
 				break;
 			}
 			Collections.sort(canEat,new Comparator<int[]>() {
@@ -47,9 +47,9 @@ public class 아기_상어 {
 				public int compare(int[] o1, int[] o2) {
 					if(o1[2]==o2[2]) {
 						if(o1[0]==o2[0]) {
-							return o1[0]-o2[0];
-						}else {
 							return o1[1]-o2[1];
+						}else {
+							return o1[0]-o2[0];
 						}
 					}else {
 						return o1[2]-o2[2];
@@ -57,13 +57,27 @@ public class 아기_상어 {
 				}
 				
 			});
-			for(int[] arr : canEat) {
-				System.out.println(Arrays.toString(arr));
-			}
+//			for(int[] arr : canEat) {
+//				System.out.println(Arrays.toString(arr));
+//			}
+//			System.out.println("------------------------");
 			eat++;
+			cnt+=canEat.get(0)[2];
+			map[cur[0]][cur[1]]=0;
+			cur[0] = canEat.get(0)[0];
+			cur[1] = canEat.get(0)[1];
+			map[cur[0]][cur[1]]=9;
+			if(eat==size) {
+				size++;
+				eat=0;
+			}
+//			for(int[] arr : map) {
+//				System.out.println(Arrays.toString(arr));
+//			}
+//			System.out.println("------------------------");
 		}
 		
-		
+		System.out.println(cnt);
 		
 	}
 	private static void bfs() {
@@ -74,7 +88,7 @@ public class 아기_상어 {
 		visited[cur[0]][cur[1]] = true;
 		while(!queue.isEmpty()) {
 			int[] tmp = queue.poll();
-			if(map[tmp[0]][tmp[1]]>=1&&map[tmp[0]][tmp[1]]<size) {
+			if(map[tmp[0]][tmp[1]]>=1&&map[tmp[0]][tmp[1]]<size&&map[tmp[0]][tmp[1]]!=9) {
 				canEat.add(tmp);
 			}
 			for(int i=0;i<4;i++) {
