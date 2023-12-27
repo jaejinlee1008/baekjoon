@@ -19,6 +19,5 @@ public class RGB거리2 {
 			input[i][2] = Integer.parseInt(st.nextToken());
 		}
 		
-	
 	}
 }
