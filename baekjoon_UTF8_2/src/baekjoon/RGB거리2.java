@@ -12,6 +12,7 @@ public class RGB거리2 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		input = new int[N+1][3];
+		
 		for(int i=1;i<=N;i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			input[i][0] = Integer.parseInt(st.nextToken());
