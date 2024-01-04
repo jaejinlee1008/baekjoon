@@ -20,7 +20,5 @@ public class RGB거리2 {
 		}
 		
 		
-		
-		
 	}
 }
