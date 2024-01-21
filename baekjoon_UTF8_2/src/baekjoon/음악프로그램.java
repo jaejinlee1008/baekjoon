@@ -10,5 +10,6 @@ public class 음악프로그램 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
+		
 	}
 }
