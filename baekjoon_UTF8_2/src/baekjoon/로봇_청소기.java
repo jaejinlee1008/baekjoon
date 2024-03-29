@@ -10,6 +10,9 @@ public class 로봇_청소기 {
 	static int startx,starty;
 	static int d;
 	static int[][] room;
+	static boolean[][] visited;
+	static int[] dx = {-1,1,0,0};
+	static int[] dy = {0,0,1,-1};
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -20,11 +23,20 @@ public class 로봇_청소기 {
 		starty = Integer.parseInt(st.nextToken());
 		d = Integer.parseInt(st.nextToken());
 		room = new int[N][M];
+		visited = new boolean[N][M];
 		for(int i=0;i<N;i++) {
 			st = new StringTokenizer(br.readLine());
 			for(int j=0;j<M;j++) {
 				room[i][j] = Integer.parseInt(st.nextToken());
 			}
+		}
+	}
+	private static boolean isClean(int x, int y) {
+		if(!visited[x][y]) {
+			visited[x][y]=true;
+			return false;
+		}else {
+			return true;
 		}
 	}
 }
